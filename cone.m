@@ -1,6 +1,4 @@
-function [] = cone(origin,col)
-%Parsing
-[x, y, ~] = getdata(origin); 
+function [] = cone(col,x,y)
 
 [x, y] = parsing(x, y, 'front');
 

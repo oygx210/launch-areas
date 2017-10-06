@@ -1,6 +1,4 @@
-function [] = front(origin,mid_col,max_col)
-%Parsing
-[x, y, ~] = getdata(origin); 
+function [] = front(mid_col,max_col,x,y)
 
 [x, y] = parsing(x, y, 'front');
 

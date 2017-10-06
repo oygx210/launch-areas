@@ -1,9 +1,6 @@
-function [] = back(origin,mid_col,max_col)
-%Parsing
-[x, y, ~] = getdata(origin); 
+function [] = back(mid_col,max_col,x,y)
 
 [x, y] = parsing(x, y, 'back');
-
 %mean
 [p_m, ad] = mid(x, y);
 

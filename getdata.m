@@ -1,15 +1,16 @@
-function [x, y ,z] = getdata(origin)
-%Getting data vectors from figure
-f = open(origin);
+function [x,y]=getdata(origin)
+open(origin);
 h = gcf;
 
-
 axesObjs = get(h, 'Children');
-dataObjs = get(axesObjs, 'Children');
+dataObjs = get(axesObjs, 'Children'); 
 
-x = get(dataObjs, 'XData');
-y = get(dataObjs, 'YData');
+objTypes = get(dataObjs, 'Type'); 
+
+x = get(dataObjs, 'YData');  
+y = get(dataObjs, 'XData');
 z = get(dataObjs, 'ZData');
 
-close(f)
+close(h);
+
 end
