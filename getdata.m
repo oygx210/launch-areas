@@ -9,7 +9,6 @@ objTypes = get(dataObjs, 'Type');
 
 x = get(dataObjs, 'YData');  
 y = get(dataObjs, 'XData');
-z = get(dataObjs, 'ZData');
 
 close(h);
 

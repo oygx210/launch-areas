@@ -1,144 +1,153 @@
+%% LAUNCH_AREAS
+
+% Crea le immagini delle aree di atterraggio in tutti i profili di missione:
+% Ala di rogallo incontrollata
+% Ala di rogallo non si apre
+% Lancio balistico
+% Infine vengono anche riportate tutti i punti di apogeo
+
+% Contributors: 
+% Mauro De Francesco - mauro.defrancesco@skywarder.eu
+% Adriano Filippo Inno - adriano.filippo.inno@skywarder.eu
+% Salvatore Andrea Bella - salvatore.andrea.bella@skywarder.eu
+
+%%
 close all
 clear all
 clc
+warning('off')  % SHUT UP MATLAB
+
 %% COLORS
+
 %[153/255 153/255 0],[1 1 204/255] yellow
 %[0 102/255 0],[204/255 1 204/255] green
 %[1 229/255 204/255] red
 %[224/255 224/255 224/255] grey
-% blue(?)
+%[102/255 178/255 1],[204/255 229/255 1]blue
 % for trasparency alpa(x) where 0<x<1 is the trasparency percentage
-%%
-%%ROGALLO OPENS
 
-%Set Current Figure and Extract Data from it
+%% NOMINAL MISSION: ROGALLO OPENS
+
+% Set Current Figure and Extract Data from it
 origin='rog_yes.fig';
 [x,y]=getdata(origin);
 
-%Front Circumference
-figure();
-front([153/255 153/255 0],[1 1 204/255],x,y)
-pause(3)
+% Position Scaled map in background
+figure()
+img = imread('map.png');
+imshow(img, 'YData',[-20000 20250], 'XData',[-20850 20000]);  %change for different sizing
+axis on
+hold on
 
-%figure() %if you want next data in another figure delete the %
+% Draws Front Circumference
+col='b';
+[h1,h2,h3,h4,h5] = front([0 128/255 1],[204/255 229/255 1],x,y,col);
+pause(2)
 hold on 
 
-%Back Circumference
-if x(1, : ) > 0 
-    fprintf('\n No x is < 0, in the ROGALLO OPENS case, the back figure wont be displayed because no point is there')
-else 
-    back([153/255 153/255 0],[1 1 204/255],x,y)
-    pause(3)
-end
+% Draws back areas
+run('back_area.m')
 
-%figure() %if you want next data in another figure delete the %
-hold on 
+% Legend
+lgnd=legend([h1,h2,h3,h5,h(1,1)],{'Zona di atterraggio in mare',...
+    'Zona di atterraggio media','Massima distanza','Base di lancio',...
+    'Zona di atterraggio a terra'},'Box','off','Location','southeast','TextColor','w');
+title('Atterraggio con ala di rogallo incontrollata');
+xlabel('Est')
+ylabel('Sud')
+axis image
 
-%Cone 
-cone([1 229/255 204/255],x,y);
-pause(3)
+clear all 
 
-clear x y z origin %clear all the variables for further figures
+%% ROGALLO DOESN'T OPEN
 
-%%
-%%ROGALLO DOESN'T OPEN
-
-%Set Current Figure and Extract Data from it
+% Set Current Figure and Extract Data from it
 origin='rog_no.fig';
 [x,y]=getdata(origin);
 
-%Front Circumference
-figure(); %if you want next data in another figure delete the %
-front([153/255 153/255 0],[1 1 204/255],x,y)
-pause(3)
+% Position Scaled map in background
+figure()
+img = imread('map.png');
+imshow(img, 'YData',[-20000 20250], 'XData',[-20850 20000]);
+axis on
+hold on
 
-%figure() %if you want next data in another figure delete the %
-hold on 
+% Draws Front Circumference
+col=[0 102/255 51/255];
+[h1,h2,h3,h4,h5] = front([0 102/255 0],[204/255 1 204/255],x,y,col)
+pause(2)
 
-%Back Circumference
-if x(1, : ) > 0 
-    fprintf('\n No x is < 0, in the ROGALLO DOESNT OPEN case,the back figure wont be displayed because no point is there')
-    else 
-    back([153/255 153/255 0],[1 1 204/255],x,y)
-    pause(3)
-end
+% Legend
+lgnd=legend([h1,h2,h3,h5],{'Zona di atterraggio in mare',...
+    'Zona di atterraggio media','Massima distanza','Base di lancio'},...
+    'Box','off','Location','southeast','TextColor','w');
+title('Atterraggio senza ala di Rogallo');
+xlabel('Est')
+ylabel('Sud')
+axis image
 
+clear all 
 
-%figure() %if you want next data in another figure delete the %
-hold on 
-
-%Cone 
-cone([1 229/255 204/255],x,y);
-pause(3)
-
-clear x y z origin %clear all the variables for further figures
-
-%%
-%%BALLISTIC 
+%% BALlISTIC
 
 %Set Current Figure and Extract Data from it
 origin='bal.fig';
 [x,y]=getdata(origin);
 
-%Front Circumference
-figure(); %if you want next data in another figure delete the %
-front([153/255 153/255 0],[1 1 204/255],x,y)
-pause(3)
+% Position Scaled map in background
+figure()
+img = imread('map.png');
+imshow(img, 'YData',[-20000 20250], 'XData',[-20850 20000]);
+axis on
+hold on
 
-%figure() %if you want next data in another figure delete the %
-hold on 
+% Draws Cone 
+[h1,h3] = cone([1 229/255 204/255],x,y);
+pause(2)
 
-%Back Circumference
-if x(1, : ) > 0 
-    fprintf('\n  No x is < 0, in the BALLISTIC case, the back figure wont be displayed because no point is there')
-else 
-    back([153/255 153/255 0],[1 1 204/255],x,y)
-    pause(3)
-end
+% Legend
+lgnd=legend([h1,h3,h5],{'Zona di atterraggio in mare',...
+    'Massima distanza','Base di lancio'},...
+    'Box','off','Location','southeast','TextColor','w');
+title('Atterraggio balistico');
+xlabel('Est')
+ylabel('Sud')
+axis image
 
-
-%figure() %if you want next data in another figure delete the %
-hold on 
-
-%Cone 
-cone([1 229/255 204/255],x,y);
-pause(3)
-
-clear x y z origin %clear all the variables for further figures
+clear all 
 
 
-%%
-%%APOGEES
+%% APOGEES
 
 %Set Current Figure and Extract Data from it
-origin='rog_no.fig';
-[x,y]=getdata(origin);
+% origin='apogee_plot.fig';
+% [x,y]=getdata(origin);
 
-%Front Circumference
-figure(); %if you want next data in another figure delete the %
-front([153/255 153/255 0],[1 1 204/255],x,y)
-pause(3)
-
-%figure() %if you want next data in another figure delete the %
-hold on 
-
-%Back Circumference
-if x(1, : ) > 0 
-    fprintf('\n  No x is < 0, in the APOGEES case, the back figure wont be displayed because no point is there')
-else 
-    back([153/255 153/255 0],[1 1 204/255],x,y)
-    pause(3)
-end
-
-
-%figure() %if you want next data in another figure delete the %
-hold on 
+% %Front Circumference
+% figure(); %if you want next data in another figure delete the %
+% front([153/255 153/255 0],[1 1 204/255],x,y)
+% pause(2)
+% 
+% %figure() %if you want next data in another figure delete the %
+% hold on 
+% 
+% %Back Circumference
+% if x(1, : ) > 0 
+%     fprintf('\n  No x is < 0, in the APOGEES case, the back figure wont be displayed because no point is there')
+% else 
+%     back([153/255 153/255 0],[1 1 204/255],x,y)
+%     pause(2)
+% end
+% 
+% 
+% %figure() %if you want next data in another figure delete the %
+% hold on 
 
 %Cone 
-cone([1 229/255 204/255],x,y);
-pause(3)
+% cone([1 229/255 204/255],x,y);
+% pause(2)
 
-clear x y z origin %clear all the variables for further figures
+% clear x y z origin %clear all the variables for further figures
 
 
 
