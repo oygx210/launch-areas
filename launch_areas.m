@@ -49,13 +49,20 @@ hold on
 run('back_area.m')
 
 % Legend
-lgnd=legend([h1,h2,h3,h5,h(1,1)],{'Zona di atterraggio in mare',...
-    'Zona di atterraggio media','Massima distanza','Base di lancio',...
-    'Zona di atterraggio a terra'},'Box','off','Location','southeast','TextColor','w');
+lgnd=legend([h1,h2,h3,h5,h(1,1),h4,h7],{'Prolungamento zona atterraggio in mare',...
+    'Media delle zone di atterraggio','Massima distanza','Base di lancio',...
+    'Zona di atterraggio a terra','Punti di atterraggio',...
+    'Punti di atterraggio'},'Box','off','Location','southeast',...
+    'TextColor','w');
 title('Atterraggio con ala di rogallo incontrollata');
-xlabel('Est')
-ylabel('Sud')
+xlabel('Km')
+ylabel('Km')
 axis image
+
+xticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000]);
+xticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'});
+yticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000])
+yticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'})
 
 clear all 
 
@@ -78,13 +85,19 @@ col=[0 102/255 51/255];
 pause(2)
 
 % Legend
-lgnd=legend([h1,h2,h3,h5],{'Zona di atterraggio in mare',...
-    'Zona di atterraggio media','Massima distanza','Base di lancio'},...
-    'Box','off','Location','southeast','TextColor','w');
+lgnd=legend([h1,h2,h3,h5,h4],{'Prolungamento zona atterraggio in mare',...
+    'Media delle zone di atterraggio','Massima distanza',...
+    'Base di lancio','Punti di atterraggio'},'Box','off','Location',...
+    'southeast','TextColor','w');
 title('Atterraggio senza ala di Rogallo');
-xlabel('Est')
-ylabel('Sud')
+xlabel('Km')
+ylabel('Km')
 axis image
+
+xticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000]);
+xticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'});
+yticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000])
+yticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'})
 
 clear all 
 
@@ -102,17 +115,22 @@ axis on
 hold on
 
 % Draws Cone 
-[h1,h3] = cone([1 229/255 204/255],x,y);
+[h1,h3,h5,h4] = cone([1 229/255 204/255],x,y);
 pause(2)
 
 % Legend
-lgnd=legend([h1,h3,h5],{'Zona di atterraggio in mare',...
-    'Massima distanza','Base di lancio'},...
+lgnd=legend([h1,h3,h5,h4],{'Zona atterraggio in mare',...
+    'Massima distanza','Base di lancio','Punti di atterraggio'},...
     'Box','off','Location','southeast','TextColor','w');
 title('Atterraggio balistico');
-xlabel('Est')
-ylabel('Sud')
+xlabel('Km')
+ylabel('Km')
 axis image
+
+xticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000]);
+xticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'});
+yticks([-20000 -15000 -10000 -5000 0 5000 10000 15000 20000])
+yticklabels({'-20', '-15', '-10', '-5', '0', '5', '10', '15', '20'})
 
 clear all 
 

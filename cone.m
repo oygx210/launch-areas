@@ -1,4 +1,4 @@
-function [h1,h3] = cone(col,x,y)
+function [h1,h3,h5,h4] = cone(col,x,y)
 
 [x, y] = parsing(x, y, 'front');
 [p_M] = maximum(x,y);
@@ -14,7 +14,9 @@ theta = acos(norm(x_proj)/norm(maxy));
 hold on
 h1=annulus(0, 0, 0, R, col, -theta, theta);
 alpha(h1,0.5);
-plot(x, y, 'k.','MarkerSize',10)
+
+
+h4=plot(x, y, 'k.','MarkerSize',10)
 h3=plot(p_M(1), p_M(2),'o','MarkerSize',13,'Color',col,'Linewidth',1.5);
 h5=plot(0,0,'r.','MarkerSize',21)
 
